@@ -1,0 +1,5 @@
+# Generated locally by scripts/build_database.py — not committed (derived from data/*.csv.gz)
+data/*.db
+__pycache__/
+*.pyc
+.DS_Store
