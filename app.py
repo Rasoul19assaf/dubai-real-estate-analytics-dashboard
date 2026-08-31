@@ -49,6 +49,11 @@ st.set_page_config(page_title="Dubai Real Estate Analytics", layout="wide", page
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
+    if not DB_PATH.exists():
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from scripts.build_database import main as build_database
+        build_database()
     conn = sqlite3.connect(DB_PATH)
     df = pd.read_sql("SELECT * FROM transactions", conn, parse_dates=["transaction_date"])
     conn.close()
