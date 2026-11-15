@@ -395,7 +395,7 @@ def ask_the_data():
                 st.warning(answer.error)
                 if getattr(answer, "detail", ""):
                     with st.expander("Technical detail"):
-                        st.code(answer.detail, language=None)
+                        st.code(answer.detail, language=None, wrap_lines=True)
             else:
                 st.markdown(answer.text)
             for i, res in enumerate(answer.sql, 1):

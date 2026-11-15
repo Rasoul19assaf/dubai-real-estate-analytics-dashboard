@@ -129,7 +129,10 @@ class DataAssistant:
                     ans.docs.append(d)
             return "\n\n".join(f"[{d.doc_id}] {d.text}" for d in hits) or "Nothing relevant found."
 
+        import time
+        attempts: list[str] = []
         for chat_model in self.chat_models:
+            t0 = time.monotonic()
             ans.sql.clear(); ans.docs.clear()
             ans.text, ans.error, ans.detail = "", None, ""
             self.last_model = getattr(chat_model, "model", "") or type(chat_model).__name__
@@ -146,7 +149,9 @@ class DataAssistant:
                 msg = str(e)
                 key = getattr(chat_model, "google_api_key", None)
                 secret = key.get_secret_value() if hasattr(key, "get_secret_value") else ""
-                ans.detail = f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:400]
+                attempts.append(f"{self.last_model} ({time.monotonic() - t0:.0f}s, {len(ans.sql)} sql calls): "
+                                f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:160])
+                ans.detail = "\n".join(attempts)
                 if "recursion" in msg.lower():
                     ans.error = "This question needed too many steps. Try a narrower question."
                     return ans
