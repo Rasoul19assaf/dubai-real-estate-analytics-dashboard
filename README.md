@@ -104,9 +104,14 @@ A LangChain agent in its own tab answers plain-language questions with two tools
 | `run_sql` (text-to-SQL) | Writes and runs SQL for every number | Read-only connection; SQLite authorizer allows `SELECT` on governed tables only, so raw tables and writes are refused by the database, not by the prompt; row and time limits |
 | `search_docs` (RAG) | Retrieves KPI definitions, data-quality findings and limitations | Vector search over Gemini embeddings, with a keyword (BM25) fallback |
 
-Every answer shows the SQL it ran and the definitions it used, and the assistant is told to say "the data can't
-answer that" instead of guessing. It runs on Gemini's free API tier with per-visit and per-day question limits.
-`python -m assistant.evaluate` scores it against answers computed by SQL and writes `docs/ASSISTANT_EVAL.md`.
+Every answer shows the SQL it ran and the definitions it used, and the assistant says "the data can't answer that"
+instead of guessing. A **figure check** (`assistant/grounding.py`) matches every number in an answer against that
+run's query results and withholds the answer if one can't be traced.
+
+**Evaluated, not assumed:** 9 test questions with answers computed by SQL
+([docs/ASSISTANT_EVAL.md](docs/ASSISTANT_EVAL.md)). The first pass scored 8 of 9: the model declined a forecast
+question but invented "current" figures without querying. That failure is why the figure check exists; after it,
+9 of 9. It runs on Gemini's free API tier (Flash-Lite) with per-visit and per-day question limits.
 
 **Isolation:** the assistant's libraries load only inside its tab. With no API key, a provider outage or a failed
 import, that tab shows a notice and the four dashboard tabs keep working. `python scripts/smoke_test.py` checks this

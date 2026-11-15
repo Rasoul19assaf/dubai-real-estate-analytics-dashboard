@@ -129,22 +129,18 @@ def candidate_models(api_key: str, preferred: str = "") -> list[str]:
     return order[:4] or [DEFAULT_MODEL]
 
 
-def gemini_chat_model(api_key: str, model: str = DEFAULT_MODEL, thinking: bool = False, timeout: int = 40):
-    """thinking=False asks the model to answer without its slow reasoning phase: the questions
-    here are lookups, and on the free tier reasoning pushed first responses past the time limit."""
+def gemini_chat_model(api_key: str, model: str = DEFAULT_MODEL, timeout: int = 40):
     from langchain_google_genai import ChatGoogleGenerativeAI
 
-    extra = {} if thinking else {"thinking_budget": 0}
     return ChatGoogleGenerativeAI(model=model, google_api_key=api_key, temperature=0,
-                                  max_output_tokens=1200, max_retries=0, timeout=timeout, **extra)
+                                  max_output_tokens=1200, max_retries=0, timeout=timeout)
 
 
 def gemini_chat_models(api_key: str, preferred: str = "") -> list:
-    """Fast variants first (no thinking), then one patient attempt with the model's defaults in
-    case a model rejects the no-thinking setting."""
-    names = candidate_models(api_key, preferred)
-    first = [gemini_chat_model(api_key, names[0]), gemini_chat_model(api_key, names[0], thinking=True, timeout=60)]
-    return first + [gemini_chat_model(api_key, n) for n in names[1:3]]
+    """One chat model per candidate name, tried in order (see DataAssistant.ask).
+    Measured on the free tier (Nov 2026): Flash-Lite answers in a few seconds with default
+    settings; it rejects thinking_budget=0, and the larger Flash models time out or hit quota."""
+    return [gemini_chat_model(api_key, n) for n in candidate_models(api_key, preferred)[:3]]
 
 
 def _text(content) -> str:

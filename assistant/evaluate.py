@@ -4,7 +4,8 @@
 
 Each question has an expected answer computed by SQL from the governed tables AT RUN TIME (so the
 test stays valid after a data refresh), or an expected behaviour (must decline / must cite the
-definition). Results are written to docs/ASSISTANT_EVAL.md. Only what was actually run is reported.
+definition). Results are written to docs/ASSISTANT_EVAL_auto.md. Only what was actually run is reported.
+(docs/ASSISTANT_EVAL.md holds the documented 15 Nov 2026 run made on the live app.)
 """
 from __future__ import annotations
 
@@ -95,8 +96,8 @@ def main():
            f"**{passed} of {len(rows)} passed.** Expected values are computed by SQL from the governed tables "
            "at run time. Checks are automatic string/number matches, so read the answers too.", "",
            "| Question | Expected | Assistant's answer | SQL calls | Time | Result |", "|---|---|---|---|---|---|", *rows]
-    (config.DOCS_DIR / "ASSISTANT_EVAL.md").write_text("\n".join(out) + "\n")
-    print(f"{passed}/{len(rows)} -> docs/ASSISTANT_EVAL.md")
+    (config.DOCS_DIR / "ASSISTANT_EVAL_auto.md").write_text("\n".join(out) + "\n")
+    print(f"{passed}/{len(rows)} -> docs/ASSISTANT_EVAL_auto.md")
 
 
 if __name__ == "__main__":
