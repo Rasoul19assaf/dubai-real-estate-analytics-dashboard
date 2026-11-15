@@ -206,6 +206,8 @@ class DataAssistant:
                                    config={"recursion_limit": MAX_STEPS})
                 ans.text = _text(out["messages"][-1].content).strip()
                 if ans.text:
+                    attempts.append(f"{self.last_model} ({time.monotonic() - t0:.0f}s, {len(ans.sql)} sql calls): ok")
+                    ans.detail = "\n".join(attempts)
                     return ans
                 ans.error = "The model returned an empty answer. Try rephrasing the question."
             except Exception as e:  # noqa: BLE001 - never let the assistant raise into the app

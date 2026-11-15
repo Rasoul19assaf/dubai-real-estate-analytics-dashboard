@@ -414,6 +414,9 @@ def ask_the_data():
                 with st.expander("Definitions and findings used: " + ", ".join(d.doc_id for d in answer.docs)):
                     for d in answer.docs:
                         st.markdown(f"**{d.doc_id} · {d.title}**  \n{d.text}")
+            if not answer.error and getattr(answer, "detail", ""):
+                with st.expander("Run log"):
+                    st.code(answer.detail, language=None, wrap_lines=True)
             st.caption(f"Model: {model} · Retrieval: {mode} · AI-generated: check the SQL before relying on a number. "
                        "Not investment advice.")
 
