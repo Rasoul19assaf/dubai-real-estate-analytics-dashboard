@@ -51,6 +51,54 @@ class Answer:
     detail: str = ""        # short technical detail for the error, safe to display
 
 
+API_ROOT = "https://generativelanguage.googleapis.com/v1beta"
+
+
+def _api(api_key: str, path: str, body: dict | None = None, timeout: int = 20) -> dict:
+    """Plain HTTPS call to the Gemini REST API (no SDK), used for listing and diagnostics."""
+    import json
+    import urllib.request
+
+    req = urllib.request.Request(f"{API_ROOT}/{path}", headers={"x-goog-api-key": api_key,
+                                 "Content-Type": "application/json"},
+                                 data=json.dumps(body).encode() if body is not None else None)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read())
+
+
+def list_models(api_key: str) -> list[str]:
+    """Names of the models this key can call with generateContent."""
+    out = _api(api_key, "models?pageSize=1000")
+    return [m["name"].split("/")[-1] for m in out.get("models", [])
+            if "generateContent" in m.get("supportedGenerationMethods", [])]
+
+
+def diagnose(api_key: str) -> str:
+    """Owner diagnostics: which chat models the key sees and how fast each answers one word."""
+    import time
+    import urllib.error
+
+    lines = []
+    try:
+        names = list_models(api_key)
+    except Exception as e:  # noqa: BLE001
+        return f"model list failed: {type(e).__name__}: {str(e)[:200]}"
+    flash = sorted(n for n in names if "flash" in n)
+    lines.append(f"{len(names)} chat models visible; flash: " + ", ".join(flash))
+    for n in candidate_models(api_key):
+        t0 = time.monotonic()
+        try:
+            out = _api(api_key, f"models/{n}:generateContent",
+                       {"contents": [{"parts": [{"text": "Reply with the single word: ok"}]}]}, timeout=30)
+            txt = out["candidates"][0]["content"]["parts"][0].get("text", "").strip()[:20]
+            lines.append(f"{n}: {time.monotonic() - t0:.1f}s -> {txt!r}")
+        except urllib.error.HTTPError as e:
+            lines.append(f"{n}: {time.monotonic() - t0:.1f}s HTTP {e.code} {e.read()[:160].decode(errors='replace')}")
+        except Exception as e:  # noqa: BLE001
+            lines.append(f"{n}: {time.monotonic() - t0:.1f}s {type(e).__name__}: {str(e)[:120]}")
+    return "\n".join(lines)
+
+
 VISIBLE_MODELS: list[str] = []      # what the key could see at start-up (for diagnostics)
 
 
@@ -60,11 +108,9 @@ def candidate_models(api_key: str, preferred: str = "") -> list[str]:
     are retired regularly and the assistant should not die when one is."""
     names: list[str] = []
     try:
-        from google import genai
-
-        names = [m.name.split("/")[-1] for m in genai.Client(api_key=api_key).models.list()]
+        names = list_models(api_key)
     except Exception as e:  # noqa: BLE001
-        VISIBLE_MODELS[:] = [f"(model list failed: {type(e).__name__})"]
+        VISIBLE_MODELS[:] = [f"(model list failed: {type(e).__name__}: {str(e)[:80]})"]
     skip = ("image", "tts", "audio", "live", "embedding", "exp", "omni", "robotics", "computer")
     usable = sorted((n for n in names if n.startswith("gemini") and "flash" in n
                      and not any(x in n for x in skip)), reverse=True)

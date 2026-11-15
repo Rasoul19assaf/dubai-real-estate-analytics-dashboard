@@ -373,6 +373,11 @@ def ask_the_data():
     if picked:
         st.session_state["ask_last_pick"] = picked
 
+    if question == "/diag":
+        from assistant.agent import diagnose
+        with st.spinner("Checking the model provider…"):
+            st.code(diagnose(api_key), language=None, wrap_lines=True)
+        question = ""
     if question:
         counter, today = _daily_counter(), _dt.date.today().isoformat()
         if counter["day"] != today:
