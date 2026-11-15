@@ -143,8 +143,8 @@ def gemini_chat_models(api_key: str, preferred: str = "") -> list:
     """Fast variants first (no thinking), then one patient attempt with the model's defaults in
     case a model rejects the no-thinking setting."""
     names = candidate_models(api_key, preferred)
-    return [gemini_chat_model(api_key, n) for n in names[:3]] + \
-           [gemini_chat_model(api_key, names[0], thinking=True, timeout=90)]
+    first = [gemini_chat_model(api_key, names[0]), gemini_chat_model(api_key, names[0], thinking=True, timeout=60)]
+    return first + [gemini_chat_model(api_key, n) for n in names[1:3]]
 
 
 def _text(content) -> str:
@@ -234,14 +234,15 @@ class DataAssistant:
                 key = getattr(chat_model, "google_api_key", None)
                 secret = key.get_secret_value() if hasattr(key, "get_secret_value") else ""
                 attempts.append(f"{self.last_model} ({time.monotonic() - t0:.0f}s, {len(ans.sql)} sql calls): "
-                                f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:160])
+                                f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:420])
                 ans.detail = "\n".join(attempts)
                 if "recursion" in msg.lower():
                     ans.error = "This question needed too many steps. Try a narrower question."
                     return ans
                 if "429" in msg or "quota" in msg.lower() or "exhausted" in msg.lower():
+                    # quotas are per model: note it and try the next model
                     ans.error = "The free API quota is used up for now. Try again in a minute."
-                    return ans
+                    continue
                 ans.error = f"The assistant could not answer ({type(e).__name__}). The dashboard tabs are unaffected."
         if ans.detail and VISIBLE_MODELS:
             ans.detail += "\nmodels visible to this key: " + ", ".join(VISIBLE_MODELS)[:500]
