@@ -51,6 +51,9 @@ class Answer:
     detail: str = ""        # short technical detail for the error, safe to display
 
 
+VISIBLE_MODELS: list[str] = []      # what the key could see at start-up (for diagnostics)
+
+
 def candidate_models(api_key: str, preferred: str = "") -> list[str]:
     """Models to try, in order: the configured one (if any), then the newest Flash-Lite models
     (fast and free), then Flash. Built from what the key can actually see, because model names
@@ -60,23 +63,37 @@ def candidate_models(api_key: str, preferred: str = "") -> list[str]:
         from google import genai
 
         names = [m.name.split("/")[-1] for m in genai.Client(api_key=api_key).models.list()]
-    except Exception:  # noqa: BLE001
-        pass
-    skip = ("image", "tts", "audio", "live", "embedding", "preview", "exp", "omni")
+    except Exception as e:  # noqa: BLE001
+        VISIBLE_MODELS[:] = [f"(model list failed: {type(e).__name__})"]
+    skip = ("image", "tts", "audio", "live", "embedding", "exp", "omni", "robotics", "computer")
     usable = sorted((n for n in names if n.startswith("gemini") and "flash" in n
                      and not any(x in n for x in skip)), reverse=True)
-    lite = [n for n in usable if "lite" in n]
-    flash = [n for n in usable if "lite" not in n]
-    order = ([preferred] if preferred and (not names or preferred in names) else []) + lite[:2] + flash[:1]
+    if names:
+        VISIBLE_MODELS[:] = usable
+    stable = [n for n in usable if "preview" not in n] or usable
+    lite = [n for n in stable if "lite" in n]
+    flash = [n for n in stable if "lite" not in n]
+    order = ([preferred] if preferred and (not names or preferred in names) else []) + lite[:2] + flash[:2]
     order = list(dict.fromkeys(order))
-    return order[:3] or [DEFAULT_MODEL]
+    return order[:4] or [DEFAULT_MODEL]
 
 
-def gemini_chat_model(api_key: str, model: str = DEFAULT_MODEL):
+def gemini_chat_model(api_key: str, model: str = DEFAULT_MODEL, thinking: bool = False, timeout: int = 40):
+    """thinking=False asks the model to answer without its slow reasoning phase: the questions
+    here are lookups, and on the free tier reasoning pushed first responses past the time limit."""
     from langchain_google_genai import ChatGoogleGenerativeAI
 
+    extra = {} if thinking else {"thinking_budget": 0}
     return ChatGoogleGenerativeAI(model=model, google_api_key=api_key, temperature=0,
-                                  max_output_tokens=1200, max_retries=0, timeout=40)
+                                  max_output_tokens=1200, max_retries=0, timeout=timeout, **extra)
+
+
+def gemini_chat_models(api_key: str, preferred: str = "") -> list:
+    """Fast variants first (no thinking), then one patient attempt with the model's defaults in
+    case a model rejects the no-thinking setting."""
+    names = candidate_models(api_key, preferred)
+    return [gemini_chat_model(api_key, n) for n in names[:3]] + \
+           [gemini_chat_model(api_key, names[0], thinking=True, timeout=90)]
 
 
 def _text(content) -> str:
@@ -159,4 +176,6 @@ class DataAssistant:
                     ans.error = "The free API quota is used up for now. Try again in a minute."
                     return ans
                 ans.error = f"The assistant could not answer ({type(e).__name__}). The dashboard tabs are unaffected."
+        if ans.detail and VISIBLE_MODELS:
+            ans.detail += "\nmodels visible to this key: " + ", ".join(VISIBLE_MODELS)[:500]
         return ans

@@ -343,12 +343,12 @@ def _assistant_code_version() -> str:
 
 @st.cache_resource(show_spinner="Starting the assistant…")
 def _assistant(api_key: str, fp: str):
-    from assistant.agent import DataAssistant, candidate_models, gemini_chat_model
+    from assistant.agent import DataAssistant, gemini_chat_models
     from assistant.retrieval import DEFAULT_EMBEDDING_MODEL, Retriever, gemini_embeddings
 
-    models = candidate_models(api_key, _secret("GEMINI_MODEL"))
+    models = gemini_chat_models(api_key, _secret("GEMINI_MODEL"))
     retriever = Retriever(embeddings=gemini_embeddings(api_key, _secret("GEMINI_EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL)))
-    return DataAssistant([gemini_chat_model(api_key, m) for m in models], retriever), models
+    return DataAssistant(models, retriever), models
 
 
 @st.fragment
