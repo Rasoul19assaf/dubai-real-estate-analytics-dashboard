@@ -13,6 +13,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from assistant import tools as T
+from assistant.grounding import check_figures
 from assistant.retrieval import Retriever
 
 DEFAULT_MODEL = "gemini-3.8-flash"
@@ -25,7 +26,9 @@ data, May-October 2026) for an investment operations team.
 
 RULES
 1. Every number in your answer must come from a run_sql result in this conversation. Never use
-   outside knowledge or estimate. If a query fails, fix it and retry (at most 3 queries per question).
+   outside knowledge or estimate. If you have not run a query, your answer must contain no figures.
+   An automatic check compares every figure you state with the query results and rejects the answer
+   if one is missing. If a query fails, fix it and retry (at most 3 queries per question).
 2. For what a KPI means, how it is calculated, data-quality issues or limitations, call search_docs
    and use what it returns.
 3. If the data cannot answer (other periods, forecasts, yield by bedroom, a specific building's
@@ -49,6 +52,8 @@ class Answer:
     docs: list[T.Doc] = field(default_factory=list)
     error: str | None = None
     detail: str = ""        # short technical detail for the error, safe to display
+    figures_checked: int = 0                                  # numbers in the answer that were verified
+    figures_unmatched: list[str] = field(default_factory=list)  # numbers not found in any tool output
 
 
 API_ROOT = "https://generativelanguage.googleapis.com/v1beta"
@@ -202,12 +207,26 @@ class DataAssistant:
             self.last_model = self.last_model.split("/")[-1]
             try:
                 agent = create_agent(chat_model, tools=[run_sql, search_docs], system_prompt=SYSTEM_PROMPT)
-                out = agent.invoke({"messages": [{"role": "user", "content": question}]},
-                                   config={"recursion_limit": MAX_STEPS})
-                ans.text = _text(out["messages"][-1].content).strip()
+                messages = [{"role": "user", "content": question}]
+                for attempt in (1, 2):
+                    out = agent.invoke({"messages": messages}, config={"recursion_limit": MAX_STEPS})
+                    ans.text = _text(out["messages"][-1].content).strip()
+                    ans.figures_checked, ans.figures_unmatched = check_figures(ans.text, question, ans.sql, ans.docs)
+                    if not ans.text or not ans.figures_unmatched or attempt == 2:
+                        break
+                    # ungrounded figures: send the model back once to look them up or drop them
+                    messages = out["messages"] + [{"role": "user", "content":
+                        "Automatic check: these figures in your answer do not appear in any query result: "
+                        + ", ".join(ans.figures_unmatched) + ". Run run_sql to get them, or rewrite the "
+                        "answer without them. Reply with the corrected answer only."}]
                 if ans.text:
-                    attempts.append(f"{self.last_model} ({time.monotonic() - t0:.0f}s, {len(ans.sql)} sql calls): ok")
+                    note = "ok" if not ans.figures_unmatched else f"withheld, unverified figures {ans.figures_unmatched}"
+                    attempts.append(f"{self.last_model} ({time.monotonic() - t0:.0f}s, {len(ans.sql)} sql calls): {note}")
                     ans.detail = "\n".join(attempts)
+                    if ans.figures_unmatched:
+                        ans.text = ""
+                        ans.error = ("Answer withheld: the assistant stated figures that do not appear in any query "
+                                     "result, so they could not be verified. Try rephrasing, or use the dashboard tabs.")
                     return ans
                 ans.error = "The model returned an empty answer. Try rephrasing the question."
             except Exception as e:  # noqa: BLE001 - never let the assistant raise into the app

@@ -67,6 +67,18 @@ def main():
     assert ans.error is None and ans.text == "Scripted final answer.", ans
     assert len(ans.sql) == 1 and len(ans.sql[0].rows) == 3 and ans.docs, ans
 
+    # a model that states figures without querying must be caught and the answer withheld
+    liar = ScriptedModel(script=[AIMessage(content="Dubai Marina: median price AED 2,100,000, yield 6.7%.")])
+    ans = DataAssistant(liar).ask("What will prices be in 2028?")
+    assert ans.error and not ans.text and ans.figures_unmatched, "ungrounded figures must be withheld"
+    # grounded figures (7.2% from a 0.0719 ratio, rounded AED amounts) must pass
+    from assistant.grounding import check_figures
+    res = T.run_sql("select gross_yield, median_ready_price_aed, ready_sales_count from mart_area_unit_kpis "
+                    "where area_name like '%Jumeirah Village Circle%' and unit_class = 'Apartment'")
+    gy, price, n = res.rows[0]
+    text = f"Yield is {gy:.1%} on a median ready price of AED {price:,.0f} ({n:,} ready sales, top 3 shown)."
+    assert check_figures(text, "JVC yield?", [res], []) == (3, []), check_figures(text, "JVC yield?", [res], [])
+
     class Boom(ScriptedModel):
         def _generate(self, *a, **k):
             raise RuntimeError("provider down")

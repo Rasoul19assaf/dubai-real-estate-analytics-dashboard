@@ -417,7 +417,9 @@ def ask_the_data():
             if not answer.error and getattr(answer, "detail", ""):
                 with st.expander("Run log"):
                     st.code(answer.detail, language=None, wrap_lines=True)
-            st.caption(f"Model: {model} · Retrieval: {mode} · AI-generated: check the SQL before relying on a number. "
+            n_fig = getattr(answer, "figures_checked", 0)
+            fig_note = f"Figure check: {n_fig} of {n_fig} figures traced to query results · " if n_fig and not answer.error else ""
+            st.caption(f"{fig_note}Model: {model} · Retrieval: {mode} · AI-generated: check the SQL before relying on a number. "
                        "Not investment advice.")
 
 

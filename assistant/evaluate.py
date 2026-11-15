@@ -58,7 +58,7 @@ def cases() -> list[dict]:
          "check": lambda a: any(d.doc_id == "KPI K10" for d in a.docs) and "ready" in a.text.lower()},
         {"q": "What will apartment prices in Dubai Marina be in 2028?",
          "expect": "declines: no forecasts in the data",
-         "check": lambda a: not a.sql or not re.search(r"\b2028\b.*AED\s*\d", a.text)},
+         "check": lambda a: bool(re.search(r"cannot|can't|not |no forecast", a.text, re.I)) and not a.figures_unmatched},
         {"q": "What is the gross yield for 2-bedroom apartments in Business Bay?",
          "expect": "says yield is not available by bedroom (may give the area-level figure)",
          "check": lambda a: bool(re.search(r"bedroom|room count", a.text, re.I))
