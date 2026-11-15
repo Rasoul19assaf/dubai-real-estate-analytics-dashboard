@@ -1,0 +1,56 @@
+name: dubai_property_ops
+version: "2.0.0"
+config-version: 2
+profile: dubai_property_ops
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+# ---------------------------------------------------------------------------
+# Business rules: the ONE place these numbers are defined.
+# Read by dbt AND by pipeline/run_models.py (the SQLite runner used by the
+# Streamlit app), so the dashboard, dbt tests and data-quality report always
+# apply the same definitions. Change a value here, rebuild, and every KPI moves.
+# ---------------------------------------------------------------------------
+vars:
+  # Reporting window covered by the source extract
+  period_start: "2026-05-01"
+  period_end: "2026-10-31"
+  months_in_period: 6
+
+  # Area crosswalk (pipeline/propose_area_map.py): a sales community is mapped to a
+  # DLD land area only with this much shared-project evidence
+  area_map_min_projects: 3
+  area_map_min_share: 0.8
+
+  # Sales: rule-based validity (replaces v1's blind 0.5/99.5 percentile clip)
+  min_sale_price_aed: 100000          # below this a "sale" is a data-entry error / partial amount
+  min_sale_price_per_sqm: 1000        # AED/sqm floor for any Dubai residential sale
+  review_sale_price_per_sqm: 150000   # above this: kept (real ultra-prime exists) but flagged for review
+  max_sale_price_per_sqm: 500000      # above this: impossible (e.g. a 70 sqm flat at AED 920M) -> excluded
+  min_unit_size_sqm: 15               # smaller than a studio -> size field error
+
+  # Rents (Ejari): rule-based validity
+  min_annual_rent_aed: 10000
+  min_rent_per_sqm: 100
+  review_rent_per_sqm: 5000
+
+  # How many observations a KPI needs before it is shown
+  min_sample_reliable: 30
+  min_sample_indicative: 10
+
+models:
+  dubai_property_ops:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+
+seeds:
+  dubai_property_ops:
+    +column_types: {}

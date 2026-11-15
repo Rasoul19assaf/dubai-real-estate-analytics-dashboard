@@ -1,0 +1,46 @@
+transaction_type,transaction_sub_type,counts_as_market_sale,rationale,rows_at_review,median_psm_at_review
+Gifts,Grant,0,gift/grant: no market price,4527,16710
+Gifts,Grant Development,0,gift/grant: no market price,100,8862
+Gifts,Grant Pre-Registration,0,gift/grant: no market price,918,23238
+Gifts,Grant on Delayed Sell,0,gift/grant: no market price,460,20952
+Mortgage,Delayed Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",3204,10258
+Mortgage,Delayed Portfolio Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",8,4849
+Mortgage,Delayed Sell Lease to Own Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",31,11278
+Mortgage,Development Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",430,6173
+Mortgage,Lease Development Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1,4378
+Mortgage,Lease Finance Modification,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",23,8465
+Mortgage,Lease Finance Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",415,9686
+Mortgage,Lease to Own Modify,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",33,4219
+Mortgage,Lease to Own Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",302,9537
+Mortgage,Lease to Own Registration Pre-Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",3,8350
+Mortgage,Lease to Own on Development Modification,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1,1301
+Mortgage,Lease to Own on Development Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1,7389
+Mortgage,Modify Delayed Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",2,14497
+Mortgage,Modify Development Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",56,5191
+Mortgage,Modify Mortgage,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1211,9208
+Mortgage,Mortgage Pre-Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",424,8326
+Mortgage,Mortgage Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",19280,10016
+Mortgage,Mortgage Transfer,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",31,12128
+Mortgage,Mortgage Transfer Pre-Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1,7759
+Mortgage,Portfolio Mortgage Development Modification,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",3,195
+Mortgage,Portfolio Mortgage Development Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",10,9219
+Mortgage,Portfolio Mortgage Modification,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",1051,8849
+Mortgage,Portfolio Mortgage Modification Pre-Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",30,7372
+Mortgage,Portfolio Mortgage Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",2946,12909
+Mortgage,Portfolio Mortgage Registration Pre-Registration,0,"loan registration: amount is the loan/collateral value, not a sale price; often duplicates a sale row",123,13868
+Sales,Adding Land By Sell,0,"land addition, not a unit sale",4,405
+Sales,Delayed Development,0,developer-level registration; median price/sqm far below market sales,11,8673
+Sales,Delayed Sell,1,sale registered after the deal date; still an arm's-length sale,8535,17724
+Sales,Delayed Sell Development,0,developer-level registration; median price/sqm far below market sales,8,6875
+Sales,Delayed Sell Lease to Own Registration,0,lease-to-own/lease finance: not an outright sale price,32,15424
+Sales,Development Registration,0,developer-level registration; median price/sqm far below market sales,203,7693
+Sales,Development Registration Pre-Registration,0,developer-level registration; median price/sqm far below market sales,1838,11821
+Sales,Lease Development Registration,0,lease-to-own/lease finance: not an outright sale price,1,4378
+Sales,Lease to Own Registration,0,lease-to-own/lease finance: not an outright sale price,336,11770
+Sales,Lease to Own Registration Pre-Registration,0,lease-to-own/lease finance: not an outright sale price,3,12032
+Sales,Lease to Own on Development Registration,0,lease-to-own/lease finance: not an outright sale price,2,7060
+Sales,Sale,1,secondary-market sale of a ready unit,26498,14531
+Sales,Sale On Payment Plan,1,ready-unit sale on a payment plan,286,12917
+Sales,Sell - Pre registration,1,off-plan sale (developer or resale before handover),72501,18817
+Sales,Sell Development,0,developer-level registration; median price/sqm far below market sales,725,7756
+Sales,Sell Development - Pre Registration,0,developer-level registration; median price/sqm far below market sales,21,12007

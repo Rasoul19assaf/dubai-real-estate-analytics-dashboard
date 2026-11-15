@@ -1,0 +1,50 @@
+source,raw_property_sub_type,unit_class,rows_at_review
+sales,Flat,Apartment,112251
+sales,Villa,Villa/Townhouse,13889
+sales,Residential,Out of scope,5917
+sales,Hotel Apartment,Hotel apartment,3320
+sales,Office,Out of scope,2967
+sales,Commercial,Out of scope,2775
+sales,Shop,Out of scope,1049
+sales,Hotel Rooms,Hotel room,658
+sales,Residential / Residential Villa,Out of scope,552
+sales,Commercial / Offices / Residential,Out of scope,323
+sales,Land,Out of scope,251
+sales,General Use,Out of scope,228
+sales,Residential Flats,Out of scope,181
+sales,Industrial,Out of scope,156
+sales,Airport,Out of scope,119
+sales,Government Housing,Out of scope,106
+sales,Labor Camp,Out of scope,42
+sales,Residential / Attached Villas,Out of scope,39
+sales,Residential / Villas,Out of scope,31
+sales,Stacked Townhouses,Villa/Townhouse,26
+sales,Unit,Out of scope,16
+sales,Sports Club,Out of scope,10
+sales,Warehouse,Out of scope,9
+sales,Agricultural,Out of scope,7
+sales,Show Rooms,Out of scope,4
+sales,Building,Out of scope,4
+sales,Workshop,Out of scope,3
+sales,Clinic,Out of scope,3
+sales,Exhbition Center,Out of scope,3
+sales,Hospital,Out of scope,2
+sales,Shopping Mall,Out of scope,1
+sales,School,Out of scope,1
+sales,Sized Partition,Out of scope,1
+sales,Health Club,Out of scope,1
+sales,Petrol Station,Out of scope,1
+rents,Flat,Apartment,232785
+rents,Villa,Villa/Townhouse,24726
+rents,Labor Camps,Out of scope,17789
+rents,Studio,Apartment,1937
+rents,Staff Accommodation,Out of scope,19
+rents,Complex Villas,Villa/Townhouse,17
+rents,Building,Out of scope,11
+rents,Penthouse,Apartment,11
+rents,Villa addendum,Out of scope,4
+rents,Arabian House,Out of scope,4
+rents,Portacabin,Out of scope,3
+rents,Hotel,Out of scope,2
+rents,Store,Out of scope,1
+rents,Shop,Out of scope,1

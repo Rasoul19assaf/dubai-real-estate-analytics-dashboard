@@ -1,0 +1,126 @@
+version: 2
+
+sources:
+  - name: dld
+    description: Dubai Land Department open-data exports, loaded as delivered by pipeline/ingest.py.
+    schema: main
+    tables:
+      - name: raw_dld_transactions
+        description: Transactions (sales, mortgages, gifts) exported from dubailand.gov.ae, May-Oct 2026.
+      - name: raw_dld_rents
+        description: Freehold residential Ejari rent contracts exported from dubailand.gov.ae, May-Oct 2026.
+
+seeds:
+  - name: area_name_map
+    description: >
+      The single list of area names across sales and rents. Sales communities are bridged to the
+      DLD land area used by rent contracts, using shared projects as evidence (pipeline/propose_area_map.py).
+      mapping_status = land_area | project_crosswalk | alias_pending_review | no_rent_match.
+    columns:
+      - name: raw_area_key
+        data_tests: [unique, not_null]
+  - name: transaction_type_rules
+    description: One reviewed decision per DLD transaction sub-type, whether it counts as a market sale, with the reason.
+  - name: unit_type_map
+    description: Maps sales and rent property sub-types to shared unit classes so the two sources can be joined.
+
+models:
+  - name: stg_dld_transactions
+    description: Typed and renamed DLD transactions. No rows removed.
+  - name: stg_dld_rents
+    description: Typed and renamed Ejari rent contracts. No rows removed.
+  - name: int_transactions_conformed
+    description: Transactions with the shared area name, unit class and sale/not-sale rule applied.
+
+  - name: fct_sales
+    description: One row per arm's-length residential sale; invalid records kept with is_valid = 0 and a reason.
+    columns:
+      - name: transaction_number
+        data_tests: [unique, not_null]
+        meta:
+          metrics:
+            valid_sales:
+              type: count_distinct
+              label: Valid sales
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K01}
+      - name: amount_aed
+        meta:
+          metrics:
+            sales_value_aed:
+              type: sum
+              label: Sales value (AED)
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K02}
+            median_price_aed:
+              type: median
+              label: Median price (AED)
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K03}
+      - name: price_per_sqm
+        meta:
+          metrics:
+            median_price_per_sqm:
+              type: median
+              label: Median price per sqm (AED)
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K04}
+      - name: is_off_plan
+        data_tests:
+          - accepted_values:
+              arguments: {values: [0, 1]}
+        meta:
+          metrics:
+            off_plan_share:
+              type: average
+              label: Off-plan share of sales
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K06}
+      - name: is_valid
+        data_tests:
+          - accepted_values:
+              arguments: {values: [0, 1]}
+      - name: area_name
+        data_tests: [not_null]
+      - name: area_mapping_status
+        description: Fails the build if a new, unmapped area name arrives.
+        data_tests:
+          - accepted_values:
+              arguments: {values: [land_area, project_crosswalk, alias_pending_review, no_rent_match]}
+
+  - name: fct_rent_contracts
+    description: One row per single-unit residential Ejari rent contract (exact duplicate rows removed); invalid records kept with is_valid = 0.
+    columns:
+      - name: row_hash
+        data_tests: [unique, not_null]
+      - name: annual_rent_aed
+        meta:
+          metrics:
+            median_annual_rent_aed:
+              type: median
+              label: Median annual rent (AED)
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K08}
+      - name: rent_per_sqm
+        meta:
+          metrics:
+            median_rent_per_sqm:
+              type: median
+              label: Median rent per sqm (AED/yr)
+              filters: [{is_valid: 1}]
+              meta: {kpi_id: K09}
+
+  - name: mart_area_unit_kpis
+    description: Acquisition screening table (price, gross yield, liquidity). Grain = area x unit class.
+    columns:
+      - name: yield_confidence
+        data_tests:
+          - accepted_values:
+              arguments: {values: [Reliable, Indicative, Insufficient data]}
+  - name: mart_area_segment_kpis
+    description: Price and liquidity by bedrooms. Grain = area x unit class x bedrooms.
+  - name: mart_monthly_market
+    description: Monthly source rows vs valid sales, value and median price per sqm.
+    columns:
+      - name: transaction_month
+        data_tests: [unique, not_null]

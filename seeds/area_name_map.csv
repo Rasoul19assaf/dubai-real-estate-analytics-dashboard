@@ -1,0 +1,271 @@
+raw_area_key,area_name,land_area_key,mapping_status,evidence,sales_rows_at_review
+ABU HAIL,Abu Hail,ABU HAIL,no_rent_match,no project shared with any rent contract,30
+AL ATHBAH,Al Athbah,AL ATHBAH,no_rent_match,no project shared with any rent contract,1
+AL AWEER FIRST,Al Aweer First,AL AWEER FIRST,no_rent_match,no project shared with any rent contract,1
+AL AWEER SECOND,Al Aweer Second,AL AWEER SECOND,no_rent_match,no project shared with any rent contract,4
+AL BADA,Al Bada,AL BADA,no_rent_match,no project shared with any rent contract,12
+AL BARAHA,Al Baraha,AL BARAHA,no_rent_match,no project shared with any rent contract,8
+AL BARARI,Al Barari,AL BARARI,alias_pending_review,"2 shared projects, 100% of matched sales -> Wadi Al Safa 3",41
+AL BARSHA FIRST,Al Barsha First,AL BARSHA FIRST,land_area,,35
+AL BARSHA SECOND,Al Barsha Second,AL BARSHA SECOND,land_area,,9
+AL BARSHA SOUTH FIFTH,Al Barsha South Fifth (Jumeirah Village Triangle),AL BARSHA SOUTH FIFTH,land_area,,0
+AL BARSHA SOUTH FOURTH,Al Barsha South Fourth (Jumeirah Village Circle),AL BARSHA SOUTH FOURTH,land_area,,0
+AL BARSHA THIRD,Al Barsha Third,AL BARSHA THIRD,land_area,,5
+AL BARSHAA SOUTH FIRST,Al Barshaa South First,AL BARSHAA SOUTH FIRST,no_rent_match,no project shared with any rent contract,2
+AL BARSHAA SOUTH SECOND,Al Barshaa South Second (Dubai Science Park),AL BARSHAA SOUTH SECOND,land_area,,2
+AL BARSHAA SOUTH THIRD,Al Barshaa South Third (Arjan),AL BARSHAA SOUTH THIRD,land_area,,7
+AL BUTEEN,Al Buteen,AL BUTEEN,no_rent_match,no project shared with any rent contract,3
+AL DHAGAYA,Al Dhagaya,AL DHAGAYA,no_rent_match,no project shared with any rent contract,7
+AL FURJAN,Jabal Ali First (Al Furjan),JABAL ALI FIRST,project_crosswalk,"38 shared projects, 100% of matched sales -> Jabal Ali First",1167
+AL GARHOUD,Al Garhoud,AL GARHOUD,no_rent_match,no project shared with any rent contract,2
+AL GOZE FIRST,Al Goze First,AL GOZE FIRST,no_rent_match,no project shared with any rent contract,16
+AL GOZE FOURTH,Al Goze Fourth,AL GOZE FOURTH,land_area,,0
+AL GOZE INDUSTRIAL FIRST,Al Goze Industrial First,AL GOZE INDUSTRIAL FIRST,no_rent_match,no project shared with any rent contract,1
+AL GOZE INDUSTRIAL FOURTH,Al Goze Industrial Fourth,AL GOZE INDUSTRIAL FOURTH,no_rent_match,no project shared with any rent contract,0
+AL GOZE INDUSTRIAL SECOND,Al Goze Industrial Second,AL GOZE INDUSTRIAL SECOND,land_area,,0
+AL GOZE INDUSTRIAL THIRD,Al Goze Industrial Third,AL GOZE INDUSTRIAL THIRD,no_rent_match,no project shared with any rent contract,1
+AL GOZE THIRD,Al Goze Third,AL GOZE THIRD,land_area,,1
+AL HAMRIYA,Al Hamriya,AL HAMRIYA,no_rent_match,no project shared with any rent contract,4
+AL HEBIAH FIFTH,Al Hebiah Fifth,AL HEBIAH FIFTH,land_area,,2025
+AL HEBIAH FIRST,Al Hebiah First (Motor City),AL HEBIAH FIRST,land_area,,777
+AL HEBIAH FOURTH,Al Hebiah Fourth (Dubai Sports City),AL HEBIAH FOURTH,land_area,,124
+AL HEBIAH SECOND,Al Hebiah Second (Dubai Studio City),AL HEBIAH SECOND,land_area,,0
+AL HEBIAH SIXTH,Al Hebiah Sixth (Mudon),AL HEBIAH SIXTH,land_area,,199
+AL HEBIAH THIRD,Al Hebiah Third (Damac Hills),AL HEBIAH THIRD,land_area,,45
+AL HUDAIBA,Al Hudaiba,AL HUDAIBA,no_rent_match,no project shared with any rent contract,1
+AL JADAF,"Al Jadaf (Dubai Healthcare City - Phase 2, Jaddaf Waterfront)",AL JADAF,land_area,,68
+AL JAFLIYA,Al Jafliya,AL JAFLIYA,no_rent_match,no project shared with any rent contract,10
+AL KARAMA,Al Karama,AL KARAMA,no_rent_match,no project shared with any rent contract,6
+AL KHABEESI,Al Khabeesi,AL KHABEESI,no_rent_match,no project shared with any rent contract,4
+AL KHAIL HEIGHTS,Al Khail Heights,AL KHAIL HEIGHTS,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Goze Fourth",37
+AL KHAIRAN FIRST,Al Khairan First (Dubai Creek Harbour),AL KHAIRAN FIRST,land_area,,754
+AL KHAWANEEJ FIRST,Al Khawaneej First,AL KHAWANEEJ FIRST,land_area,,9
+AL KHAWANEEJ SECOND,Al Khawaneej Second,AL KHAWANEEJ SECOND,no_rent_match,no project shared with any rent contract,5
+AL KHEERAN,Al Kheeran,AL KHEERAN,land_area,,19
+AL KIFAF,Al Kifaf,AL KIFAF,land_area,,210
+AL LUSAILY,Al Lusaily,AL LUSAILY,no_rent_match,no project shared with any rent contract,0
+AL MAMZER,Al Mamzer,AL MAMZER,land_area,,10
+AL MANARA,Al Manara,AL MANARA,land_area,,4
+AL MARARR,Al Mararr,AL MARARR,no_rent_match,no project shared with any rent contract,9
+AL MERKADH,"Al Merkadh (Meydan One, Sobha Heartland)",AL MERKADH,land_area,,83
+AL MIZHAR FIRST,Al Mizhar First,AL MIZHAR FIRST,no_rent_match,no project shared with any rent contract,9
+AL MIZHAR FOURTH,Al Mizhar Fourth,AL MIZHAR FOURTH,no_rent_match,no project shared with any rent contract,0
+AL MIZHAR SECOND,Al Mizhar Second,AL MIZHAR SECOND,no_rent_match,no project shared with any rent contract,6
+AL MIZHAR THIRD,Al Mizhar Third,AL MIZHAR THIRD,no_rent_match,no project shared with any rent contract,2
+AL MURQABAT,Al Murqabat,AL MURQABAT,no_rent_match,no project shared with any rent contract,9
+AL MUTEENA,Al Muteena,AL MUTEENA,no_rent_match,no project shared with any rent contract,9
+AL NAHDA FIRST,Al Nahda First,AL NAHDA FIRST,no_rent_match,no project shared with any rent contract,8
+AL NAHDA SECOND,Al Nahda Second,AL NAHDA SECOND,no_rent_match,no project shared with any rent contract,7
+AL QUSAIS,Al Qusais,AL QUSAIS,no_rent_match,no project shared with any rent contract,1
+AL QUSAIS INDUSTRIAL FIFTH,Al Qusais Industrial Fifth,AL QUSAIS INDUSTRIAL FIFTH,land_area,,2
+AL QUSAIS INDUSTRIAL FIRST,Al Qusais Industrial First,AL QUSAIS INDUSTRIAL FIRST,no_rent_match,no project shared with any rent contract,0
+AL QUSAIS INDUSTRIAL FOURTH,Al Qusais Industrial Fourth,AL QUSAIS INDUSTRIAL FOURTH,land_area,,4
+AL QUSAIS INDUSTRIAL SECOND,Al Qusais Industrial Second,AL QUSAIS INDUSTRIAL SECOND,no_rent_match,no project shared with any rent contract,1
+AL QUSAIS INDUSTRIAL THIRD,Al Qusais Industrial Third,AL QUSAIS INDUSTRIAL THIRD,land_area,,0
+AL RAFFA,Al Raffa,AL RAFFA,no_rent_match,no project shared with any rent contract,9
+AL RAS,Al Ras,AL RAS,no_rent_match,no project shared with any rent contract,6
+AL RASHIDIYA,Al Rashidiya,AL RASHIDIYA,no_rent_match,no project shared with any rent contract,26
+AL REGA,Al Rega,AL REGA,no_rent_match,no project shared with any rent contract,2
+AL ROWAIYAH FIRST,Al Rowaiyah First,AL ROWAIYAH FIRST,land_area,,731
+AL SABKHA,Al Sabkha,AL SABKHA,no_rent_match,no project shared with any rent contract,0
+AL SAFFA FIRST,Al Saffa First,AL SAFFA FIRST,no_rent_match,no project shared with any rent contract,1
+AL SAFFA SECOND,Al Saffa Second,AL SAFFA SECOND,no_rent_match,no project shared with any rent contract,8
+AL SAFOUH FIRST,Al Safouh First (Sufouh Gardens),AL SAFOUH FIRST,land_area,,0
+AL SAFOUH SECOND,Al Safouh Second,AL SAFOUH SECOND,land_area,,0
+AL SATWA,Al Satwa,AL SATWA,land_area,,454
+AL SUQ AL KABEER,Al Suq Al Kabeer,AL SUQ AL KABEER,no_rent_match,no project shared with any rent contract,9
+AL THANAYAH FOURTH,Al Thanayah Fourth (Emirate Living),AL THANAYAH FOURTH,land_area,,0
+AL THANYAH FIFTH,"Al Thanyah Fifth (Jumeirah Lakes Towers, Jumeirah Park)",AL THANYAH FIFTH,land_area,,790
+AL THANYAH FIRST,Al Thanyah First (Barsha Heights),AL THANYAH FIRST,land_area,,0
+AL THANYAH THIRD,"Al Thanyah Third (The Greens, The Lakes)",AL THANYAH THIRD,land_area,,1
+AL TTAY,Al Ttay,AL TTAY,land_area,,7
+AL TWAR FIFTH,Al Twar Fifth,AL TWAR FIFTH,no_rent_match,no project shared with any rent contract,5
+AL TWAR FIRST,Al Twar First,AL TWAR FIRST,no_rent_match,no project shared with any rent contract,6
+AL TWAR FOURTH,Al Twar Fourth,AL TWAR FOURTH,no_rent_match,no project shared with any rent contract,15
+AL TWAR SECOND,Al Twar Second,AL TWAR SECOND,no_rent_match,no project shared with any rent contract,5
+AL TWAR THIRD,Al Twar Third,AL TWAR THIRD,no_rent_match,no project shared with any rent contract,3
+AL WAHA,Al Waha,AL WAHA,alias_pending_review,"1 shared projects, 100% of matched sales -> Wadi Al Safa 7",11
+AL WAHEDA,Al Waheda,AL WAHEDA,no_rent_match,no project shared with any rent contract,27
+AL WARQA FIRST,Al Warqa First,AL WARQA FIRST,no_rent_match,no project shared with any rent contract,7
+AL WARQA FOURTH,Al Warqa Fourth,AL WARQA FOURTH,no_rent_match,no project shared with any rent contract,4
+AL WARQA SECOND,Al Warqa Second,AL WARQA SECOND,no_rent_match,no project shared with any rent contract,2
+AL WARQA THIRD,Al Warqa Third,AL WARQA THIRD,no_rent_match,no project shared with any rent contract,7
+AL WARSAN FIRST,Al Warsan First (International City Ph 1),AL WARSAN FIRST,land_area,,0
+AL WARSAN SECOND,Al Warsan Second,AL WARSAN SECOND,land_area,,0
+AL WARSAN THIRD,Al Warsan Third,AL WARSAN THIRD,no_rent_match,no project shared with any rent contract,24
+AL WASL,Al Wasl (City Walk),AL WASL,land_area,,271
+AL YELAYISS 1,Al Yelayiss 1 (Mira),AL YELAYISS 1,land_area,,785
+AL YELAYISS 2,Al Yelayiss 2 (Town Square),AL YELAYISS 2,land_area,,356
+AL YELAYISS 5,Al Yelayiss 5,AL YELAYISS 5,no_rent_match,no project shared with any rent contract,101
+AL YUFRAH 1,Al Yufrah 1,AL YUFRAH 1,land_area,,807
+AL YUFRAH 2,Al Yufrah 2,AL YUFRAH 2,land_area,,0
+AL YUFRAH 3,Al Yufrah 3,AL YUFRAH 3,land_area,,0
+ARABIAN RANCHES I,Wadi Al Safa 6 (Arabian Ranches I),WADI AL SAFA 6,project_crosswalk,"5 shared projects, 100% of matched sales -> Wadi Al Safa 6",111
+ARABIAN RANCHES II,"Wadi Al Safa 7 (Arabian Ranches II, Serena)",WADI AL SAFA 7,project_crosswalk,"11 shared projects, 100% of matched sales -> Wadi Al Safa 7",44
+ARABIAN RANCHES III,"Wadi Al Safa 5 (Dubai Land Residence Complex, Villanova)",WADI AL SAFA 5,project_crosswalk,"5 shared projects, 100% of matched sales -> Wadi Al Safa 5",42
+ARABIAN RANCHES POLO CLUB,Arabian Ranches Polo Club,ARABIAN RANCHES POLO CLUB,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Hebiah Second",3
+ARJAN,Al Barshaa South Third (Arjan),AL BARSHAA SOUTH THIRD,project_crosswalk,"45 shared projects, 100% of matched sales -> Al Barshaa South Third",1552
+BARSHA HEIGHTS,Al Thanyah First (Barsha Heights),AL THANYAH FIRST,project_crosswalk,"4 shared projects, 100% of matched sales -> Al Thanyah First",133
+BLUEWATERS,Bluewaters,BLUEWATERS,alias_pending_review,"1 shared projects, 100% of matched sales -> Marsa Dubai",23
+BUKADRA,Bukadra,BUKADRA,land_area,,314
+BURJ KHALIFA,Burj Khalifa,BURJ KHALIFA,land_area,,981
+BUSINESS BAY,Business Bay,BUSINESS BAY,land_area,,2631
+BUSINESS PARK,Business Park,BUSINESS PARK,no_rent_match,no project shared with any rent contract,553
+CHERRYWOODS,Cherrywoods,CHERRYWOODS,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Yelayiss 1",17
+CITY OF ARABIA,City Of Arabia,CITY OF ARABIA,alias_pending_review,"2 shared projects, 100% of matched sales -> Wadi Al Safa 4",2558
+CITY WALK,Al Wasl (City Walk),AL WASL,project_crosswalk,"11 shared projects, 100% of matched sales -> Al Wasl",74
+DAMAC HILLS,Al Hebiah Third (Damac Hills),AL HEBIAH THIRD,project_crosswalk,"35 shared projects, 100% of matched sales -> Al Hebiah Third",762
+DISCOVERY GARDENS,Discovery Gardens,DISCOVERY GARDENS,no_rent_match,no project shared with any rent contract,392
+DMCC-EZ2,Dmcc-Ez2,DMCC-EZ2,alias_pending_review,"1 shared projects, 100% of matched sales -> Jabal Ali First",280
+DOWN TOWN JABAL ALI,Jabal Ali Industrial Second (Down Town Jabal Ali),JABAL ALI INDUSTRIAL SECOND,project_crosswalk,"4 shared projects, 100% of matched sales -> Jabal Ali Industrial Second",1760
+DUBAI CREEK HARBOUR,Al Khairan First (Dubai Creek Harbour),AL KHAIRAN FIRST,project_crosswalk,"31 shared projects, 100% of matched sales -> Al Khairan First",588
+DUBAI DESIGN DISTRICT,Dubai Design District,DUBAI DESIGN DISTRICT,no_rent_match,no project shared with any rent contract,10
+DUBAI GOLF CITY,Dubai Golf City,DUBAI GOLF CITY,no_rent_match,no project shared with any rent contract,7
+DUBAI HARBOUR,"Marsa Dubai (Dubai Marina, Jumeirah Beach Residence)",MARSA DUBAI,project_crosswalk,"7 shared projects, 100% of matched sales -> Marsa Dubai",162
+DUBAI HEALTHCARE CITY - PHASE 1,Dubai Healthcare City - Phase 1,DUBAI HEALTHCARE CITY - PHASE 1,no_rent_match,no project shared with any rent contract,4
+DUBAI HEALTHCARE CITY - PHASE 2,"Al Jadaf (Dubai Healthcare City - Phase 2, Jaddaf Waterfront)",AL JADAF,project_crosswalk,"11 shared projects, 100% of matched sales -> Al Jadaf",345
+DUBAI HILLS,Hadaeq Sheikh Mohammed Bin Rashid (Dubai Hills),HADAEQ SHEIKH MOHAMMED BIN RASHID,project_crosswalk,"35 shared projects, 100% of matched sales -> Hadaeq Sheikh Mohammed Bin Rashid",578
+DUBAI INDUSTRIAL CITY,Saih Shuaib 2 (Dubai Industrial City),SAIH SHUAIB 2,project_crosswalk,"4 shared projects, 100% of matched sales -> Saih Shuaib 2",486
+DUBAI INTERNATIONAL ACADEMIC CITY,Dubai International Academic City,DUBAI INTERNATIONAL ACADEMIC CITY,no_rent_match,no project shared with any rent contract,1
+DUBAI INTERNATIONAL AIRPORT,Dubai International Airport,DUBAI INTERNATIONAL AIRPORT,no_rent_match,no project shared with any rent contract,0
+DUBAI INVESTMENT PARK FIRST,Dubai Investment Park First,DUBAI INVESTMENT PARK FIRST,land_area,,1788
+DUBAI INVESTMENT PARK SECOND,Dubai Investment Park Second,DUBAI INVESTMENT PARK SECOND,land_area,,373
+DUBAI LAND RESIDENCE COMPLEX,"Wadi Al Safa 5 (Dubai Land Residence Complex, Villanova)",WADI AL SAFA 5,project_crosswalk,"14 shared projects, 99% of matched sales -> Wadi Al Safa 5",2470
+DUBAI LIFESTYLE CITY,Dubai Lifestyle City,DUBAI LIFESTYLE CITY,no_rent_match,no project shared with any rent contract,12
+DUBAI MARINA,"Marsa Dubai (Dubai Marina, Jumeirah Beach Residence)",MARSA DUBAI,project_crosswalk,"47 shared projects, 100% of matched sales -> Marsa Dubai",1060
+DUBAI MARITIME CITY,Dubai Maritime City,DUBAI MARITIME CITY,alias_pending_review,"2 shared projects, 100% of matched sales -> Madinat Dubai Almelaheyah",400
+DUBAI PRODUCTION CITY,"Me'aisem First (Dubai Production City, Jumeirah Golf)",ME'AISEM FIRST,project_crosswalk,"14 shared projects, 100% of matched sales -> Me'aisem First",1161
+DUBAI SCIENCE PARK,Al Barshaa South Second (Dubai Science Park),AL BARSHAA SOUTH SECOND,project_crosswalk,"6 shared projects, 100% of matched sales -> Al Barshaa South Second",624
+DUBAI SOUTH,"Madinat Al Mataar (Dubai South, Emaar South)",MADINAT AL MATAAR,project_crosswalk,"17 shared projects, 100% of matched sales -> Madinat Al Mataar",899
+DUBAI SPORTS CITY,Al Hebiah Fourth (Dubai Sports City),AL HEBIAH FOURTH,project_crosswalk,"56 shared projects, 100% of matched sales -> Al Hebiah Fourth",1138
+DUBAI STUDIO CITY,Al Hebiah Second (Dubai Studio City),AL HEBIAH SECOND,project_crosswalk,"10 shared projects, 100% of matched sales -> Al Hebiah Second",678
+DUBAI WATER CANAL,Dubai Water Canal,DUBAI WATER CANAL,alias_pending_review,"4 shared projects, 73% of matched sales -> Al Wasl",80
+DUBAI WATER FRONT,Dubai Water Front,DUBAI WATER FRONT,alias_pending_review,"2 shared projects, 100% of matched sales -> Hessyan First",6
+EMAAR SOUTH,"Madinat Al Mataar (Dubai South, Emaar South)",MADINAT AL MATAAR,project_crosswalk,"10 shared projects, 100% of matched sales -> Madinat Al Mataar",97
+EMIRATE LIVING,Al Thanayah Fourth (Emirate Living),AL THANAYAH FOURTH,project_crosswalk,"15 shared projects, 100% of matched sales -> Al Thanayah Fourth",207
+EYAL NASSER,Eyal Nasser,EYAL NASSER,no_rent_match,no project shared with any rent contract,1
+FALCON CITY OF WONDERS,Falcon City Of Wonders,FALCON CITY OF WONDERS,alias_pending_review,"2 shared projects, 100% of matched sales -> Wadi Al Safa 2",161
+GHADEER AL TAIR,Ghadeer Al Tair,GHADEER AL TAIR,no_rent_match,no project shared with any rent contract,28
+GRAND VIEWS,Grand Views,GRAND VIEWS,alias_pending_review,"1 shared projects, 100% of matched sales -> Nad Al Shiba First",15
+HADAEQ SHEIKH MOHAMMED BIN RASHID,Hadaeq Sheikh Mohammed Bin Rashid (Dubai Hills),HADAEQ SHEIKH MOHAMMED BIN RASHID,land_area,,354
+HESSYAN FIRST,Hessyan First,HESSYAN FIRST,land_area,,0
+HOR AL ANZ,Hor Al Anz,HOR AL ANZ,no_rent_match,no project shared with any rent contract,58
+HOR AL ANZ EAST,Hor Al Anz East,HOR AL ANZ EAST,no_rent_match,no project shared with any rent contract,4
+HORIZON,Horizon,HORIZON,no_rent_match,no project shared with any rent contract,622
+INTERNATIONAL CITY PH 1,Al Warsan First (International City Ph 1),AL WARSAN FIRST,project_crosswalk,"15 shared projects, 100% of matched sales -> Al Warsan First",753
+INTERNATIONAL CITY PH 2 & 3,Warsan Fourth (International City Ph 2 & 3),WARSAN FOURTH,project_crosswalk,"13 shared projects, 100% of matched sales -> Warsan Fourth",877
+ISLAND 2,Island 2,ISLAND 2,land_area,,1
+JABAL ALI,Jabal Ali,JABAL ALI,land_area,,0
+JABAL ALI FIRST,Jabal Ali First (Al Furjan),JABAL ALI FIRST,land_area,,1634
+JABAL ALI INDUSTRIAL FIRST,Jabal Ali Industrial First,JABAL ALI INDUSTRIAL FIRST,land_area,,27
+JABAL ALI INDUSTRIAL SECOND,Jabal Ali Industrial Second (Down Town Jabal Ali),JABAL ALI INDUSTRIAL SECOND,land_area,,1734
+JABEL ALI HILLS,Jabel Ali Hills,JABEL ALI HILLS,no_rent_match,no project shared with any rent contract,59
+JADDAF WATERFRONT,"Al Jadaf (Dubai Healthcare City - Phase 2, Jaddaf Waterfront)",AL JADAF,project_crosswalk,"7 shared projects, 100% of matched sales -> Al Jadaf",153
+JUMEIRA BAY,Jumeira Bay,JUMEIRA BAY,alias_pending_review,"1 shared projects, 100% of matched sales -> Island 2",4
+JUMEIRAH BEACH RESIDENCE,"Marsa Dubai (Dubai Marina, Jumeirah Beach Residence)",MARSA DUBAI,project_crosswalk,"3 shared projects, 100% of matched sales -> Marsa Dubai",195
+JUMEIRAH FIRST,Jumeirah First (La Mer),JUMEIRAH FIRST,land_area,,57
+JUMEIRAH GOLF,"Me'aisem First (Dubai Production City, Jumeirah Golf)",ME'AISEM FIRST,project_crosswalk,"16 shared projects, 100% of matched sales -> Me'aisem First",86
+JUMEIRAH HEIGHTS,Jumeirah Heights,JUMEIRAH HEIGHTS,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Thanyah Fifth",34
+JUMEIRAH ISLANDS,Jumeirah Islands,JUMEIRAH ISLANDS,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Thanyah Fifth",22
+JUMEIRAH LAKES TOWERS,"Al Thanyah Fifth (Jumeirah Lakes Towers, Jumeirah Park)",AL THANYAH FIFTH,project_crosswalk,"30 shared projects, 98% of matched sales -> Al Thanyah Fifth",891
+JUMEIRAH LIVING,Um Suqaim Third (Jumeirah Living),UM SUQAIM THIRD,project_crosswalk,"3 shared projects, 100% of matched sales -> Um Suqaim Third",16
+JUMEIRAH PARK,"Al Thanyah Fifth (Jumeirah Lakes Towers, Jumeirah Park)",AL THANYAH FIFTH,project_crosswalk,"6 shared projects, 100% of matched sales -> Al Thanyah Fifth",57
+JUMEIRAH SECOND,Jumeirah Second,JUMEIRAH SECOND,land_area,,34
+JUMEIRAH THIRD,Jumeirah Third,JUMEIRAH THIRD,no_rent_match,no project shared with any rent contract,5
+JUMEIRAH VILLAGE CIRCLE,Al Barsha South Fourth (Jumeirah Village Circle),AL BARSHA SOUTH FOURTH,project_crosswalk,"196 shared projects, 100% of matched sales -> Al Barsha South Fourth",4709
+JUMEIRAH VILLAGE TRIANGLE,Al Barsha South Fifth (Jumeirah Village Triangle),AL BARSHA SOUTH FIFTH,project_crosswalk,"23 shared projects, 100% of matched sales -> Al Barsha South Fifth",1052
+LA MER,Jumeirah First (La Mer),JUMEIRAH FIRST,project_crosswalk,"8 shared projects, 100% of matched sales -> Jumeirah First",35
+LIVING LEGENDS,"Wadi Al Safa 3 (Majan, Living Legends)",WADI AL SAFA 3,project_crosswalk,"9 shared projects, 100% of matched sales -> Wadi Al Safa 3",341
+LIWAN,Wadi Al Safa 2 (Liwan),WADI AL SAFA 2,project_crosswalk,"35 shared projects, 100% of matched sales -> Wadi Al Safa 2",433
+LIWAN 2,Liwan 2,LIWAN 2,alias_pending_review,"1 shared projects, 100% of matched sales -> Wadi Al Safa 2",17
+MADINAT AL MATAAR,"Madinat Al Mataar (Dubai South, Emaar South)",MADINAT AL MATAAR,land_area,,9335
+MADINAT DUBAI ALMELAHEYAH,Madinat Dubai Almelaheyah,MADINAT DUBAI ALMELAHEYAH,land_area,,290
+MADINAT HIND 3,Madinat Hind 3,MADINAT HIND 3,no_rent_match,no project shared with any rent contract,0
+MADINAT HIND 4,Madinat Hind 4,MADINAT HIND 4,land_area,,580
+MADINAT LATIFA,Madinat Latifa,MADINAT LATIFA,no_rent_match,no project shared with any rent contract,1
+MAJAN,"Wadi Al Safa 3 (Majan, Living Legends)",WADI AL SAFA 3,project_crosswalk,"12 shared projects, 100% of matched sales -> Wadi Al Safa 3",2462
+MANKHOOL,Mankhool,MANKHOOL,no_rent_match,no project shared with any rent contract,1
+MARSA DUBAI,"Marsa Dubai (Dubai Marina, Jumeirah Beach Residence)",MARSA DUBAI,land_area,,122
+MBR DISTRICT 1,"Al Merkadh (Meydan One, Sobha Heartland)",AL MERKADH,project_crosswalk,"18 shared projects, 100% of matched sales -> Al Merkadh",107
+MBR DISTRICT 7,MBR District 7,MBR DISTRICT 7,alias_pending_review,"1 shared projects, 100% of matched sales -> Hadaeq Sheikh Mohammed Bin Rashid",39
+ME'AISEM FIRST,"Me'aisem First (Dubai Production City, Jumeirah Golf)",ME'AISEM FIRST,land_area,,183
+ME'AISEM SECOND,Me'aisem Second,ME'AISEM SECOND,no_rent_match,no project shared with any rent contract,83
+MEDYAN RACE COURSE VILLAS,Medyan Race Course Villas,MEDYAN RACE COURSE VILLAS,no_rent_match,no project shared with any rent contract,1
+MEYDAN AVENUE,Nad Al Shiba First (Meydan Avenue),NAD AL SHIBA FIRST,project_crosswalk,"9 shared projects, 100% of matched sales -> Nad Al Shiba First",63
+MEYDAN ONE,"Al Merkadh (Meydan One, Sobha Heartland)",AL MERKADH,project_crosswalk,"55 shared projects, 100% of matched sales -> Al Merkadh",753
+MILLENNIUM,Millennium,MILLENNIUM,alias_pending_review,"1 shared projects, 100% of matched sales -> Nad Al Shiba First",2
+MINA RASHID,Mina Rashid,MINA RASHID,alias_pending_review,"1 shared projects, 100% of matched sales -> Madinat Dubai Almelaheyah",14
+MIRA,Al Yelayiss 1 (Mira),AL YELAYISS 1,project_crosswalk,"8 shared projects, 100% of matched sales -> Al Yelayiss 1",92
+MIRDIF,Mirdif,MIRDIF,land_area,,102
+MOTOR CITY,Al Hebiah First (Motor City),AL HEBIAH FIRST,project_crosswalk,"3 shared projects, 100% of matched sales -> Al Hebiah First",615
+MUDON,Al Hebiah Sixth (Mudon),AL HEBIAH SIXTH,project_crosswalk,"6 shared projects, 100% of matched sales -> Al Hebiah Sixth",71
+MUHAISANAH FIRST,Muhaisanah First,MUHAISANAH FIRST,land_area,,28
+MUHAISANAH FOURTH,Muhaisanah Fourth,MUHAISANAH FOURTH,no_rent_match,no project shared with any rent contract,1
+MUHAISANAH SECOND,Muhaisanah Second,MUHAISANAH SECOND,no_rent_match,no project shared with any rent contract,1
+MUHAISANAH THIRD,Muhaisanah Third,MUHAISANAH THIRD,no_rent_match,no project shared with any rent contract,2
+MUSHRIF,Mushrif,MUSHRIF,no_rent_match,no project shared with any rent contract,0
+NAD AL HAMAR,Nad Al Hamar,NAD AL HAMAR,land_area,,39
+NAD AL SHEBA GARDENS,Nad Al Sheba Gardens,NAD AL SHEBA GARDENS,alias_pending_review,"2 shared projects, 100% of matched sales -> Nad Al Shiba First",43
+NAD AL SHIBA FIRST,Nad Al Shiba First (Meydan Avenue),NAD AL SHIBA FIRST,land_area,,171
+NAD AL SHIBA FOURTH,Nad Al Shiba Fourth,NAD AL SHIBA FOURTH,no_rent_match,no project shared with any rent contract,1
+NAD AL SHIBA SECOND,Nad Al Shiba Second,NAD AL SHIBA SECOND,no_rent_match,no project shared with any rent contract,1
+NAD AL SHIBA THIRD,Nad Al Shiba Third,NAD AL SHIBA THIRD,no_rent_match,no project shared with any rent contract,9
+NAD SHAMMA,Nad Shamma,NAD SHAMMA,no_rent_match,no project shared with any rent contract,1
+NADD HESSA,Nadd Hessa (Silicon Oasis),NADD HESSA,land_area,,1
+NAIF,Naif,NAIF,no_rent_match,no project shared with any rent contract,8
+OUD METHA,Oud Metha,OUD METHA,no_rent_match,no project shared with any rent contract,1
+PALM DEIRA,Palm Deira,PALM DEIRA,land_area,,1330
+PALM JABAL ALI,Palm Jabal Ali,PALM JABAL ALI,no_rent_match,no project shared with any rent contract,302
+PALM JUMEIRAH,Palm Jumeirah,PALM JUMEIRAH,land_area,,491
+PALMAROSA,Palmarosa,PALMAROSA,no_rent_match,no project shared with any rent contract,3
+PEARL JUMEIRA,Pearl Jumeira,PEARL JUMEIRA,alias_pending_review,"1 shared projects, 100% of matched sales -> Jumeirah First",7
+POLO TOWNHOUSES IGO,Polo Townhouses Igo,POLO TOWNHOUSES IGO,alias_pending_review,"1 shared projects, 100% of matched sales -> Nad Al Shiba First",1
+PORT SAEED,Port Saeed,PORT SAEED,no_rent_match,no project shared with any rent contract,12
+RAS AL KHOR INDUSTRIAL FIRST,Ras Al Khor Industrial First,RAS AL KHOR INDUSTRIAL FIRST,land_area,,133
+RAS AL KHOR INDUSTRIAL SECOND,Ras Al Khor Industrial Second,RAS AL KHOR INDUSTRIAL SECOND,land_area,,0
+RAS AL KHOR INDUSTRIAL THIRD,Ras Al Khor Industrial Third,RAS AL KHOR INDUSTRIAL THIRD,land_area,,0
+REGA AL BUTEEN,Rega Al Buteen,REGA AL BUTEEN,land_area,,6
+REMRAAM,Remraam,REMRAAM,alias_pending_review,"2 shared projects, 100% of matched sales -> Al Hebiah Fifth",79
+RUKAN,Rukan,RUKAN,alias_pending_review,"2 shared projects, 100% of matched sales -> Wadi Al Safa 7",7
+SAIH ALDAHAL,Saih Aldahal,SAIH ALDAHAL,no_rent_match,no project shared with any rent contract,0
+SAIH SHUAIB 1,Saih Shuaib 1,SAIH SHUAIB 1,land_area,,0
+SAIH SHUAIB 2,Saih Shuaib 2 (Dubai Industrial City),SAIH SHUAIB 2,land_area,,11
+SAIH SHUAIB 3,Saih Shuaib 3,SAIH SHUAIB 3,land_area,,8
+SAIH SHUAIB 4,Saih Shuaib 4,SAIH SHUAIB 4,land_area,,12
+SAMA AL JADAF,Sama Al Jadaf,SAMA AL JADAF,no_rent_match,no project shared with any rent contract,485
+SERENA,"Wadi Al Safa 7 (Arabian Ranches II, Serena)",WADI AL SAFA 7,project_crosswalk,"3 shared projects, 100% of matched sales -> Wadi Al Safa 7",35
+SILICON OASIS,Nadd Hessa (Silicon Oasis),NADD HESSA,project_crosswalk,"49 shared projects, 100% of matched sales -> Nadd Hessa",705
+SOBHA HEARTLAND,"Al Merkadh (Meydan One, Sobha Heartland)",AL MERKADH,project_crosswalk,"20 shared projects, 100% of matched sales -> Al Merkadh",478
+SUFOUH GARDENS,Al Safouh First (Sufouh Gardens),AL SAFOUH FIRST,project_crosswalk,"3 shared projects, 100% of matched sales -> Al Safouh First",91
+SUSTAINABLE CITY,Sustainable City,SUSTAINABLE CITY,alias_pending_review,"1 shared projects, 100% of matched sales -> Wadi Al Safa 7",14
+TECOM SITE A,Tecom Site A,TECOM SITE A,alias_pending_review,"1 shared projects, 100% of matched sales -> Al Safouh Second",233
+TECOM SITE D,Tecom Site D,TECOM SITE D,no_rent_match,no project shared with any rent contract,1
+THE FIELD,The Field,THE FIELD,alias_pending_review,"1 shared projects, 100% of matched sales -> Wadi Al Safa 3",57
+THE GREENS,"Al Thanyah Third (The Greens, The Lakes)",AL THANYAH THIRD,project_crosswalk,"4 shared projects, 100% of matched sales -> Al Thanyah Third",189
+THE LAKES,"Al Thanyah Third (The Greens, The Lakes)",AL THANYAH THIRD,project_crosswalk,"6 shared projects, 100% of matched sales -> Al Thanyah Third",53
+THE VALLEY,The Valley,THE VALLEY,alias_pending_review,"2 shared projects, 100% of matched sales -> Al Yufrah 1",26
+THE VILLA,The Villa,THE VILLA,alias_pending_review,"1 shared projects, 100% of matched sales -> Wadi Al Safa 5",38
+THE WORLD,The World,THE WORLD,no_rent_match,no project shared with any rent contract,11
+TILAL AL GHAF,Tilal Al Ghaf,TILAL AL GHAF,alias_pending_review,"2 shared projects, 100% of matched sales -> Al Hebiah Fourth",44
+TOWN SQUARE,Al Yelayiss 2 (Town Square),AL YELAYISS 2,project_crosswalk,"12 shared projects, 100% of matched sales -> Al Yelayiss 2",307
+TRADE CENTER FIRST,Trade Center First,TRADE CENTER FIRST,land_area,,67
+TRADE CENTER SECOND,Trade Center Second,TRADE CENTER SECOND,land_area,,15
+UM AL SHEIF,Um Al Sheif,UM AL SHEIF,no_rent_match,no project shared with any rent contract,10
+UM HURAIR FIRST,Um Hurair First,UM HURAIR FIRST,no_rent_match,no project shared with any rent contract,2
+UM HURAIR SECOND,Um Hurair Second,UM HURAIR SECOND,land_area,,0
+UM RAMOOL,Um Ramool,UM RAMOOL,no_rent_match,no project shared with any rent contract,2
+UM SUQAIM FIRST,Um Suqaim First,UM SUQAIM FIRST,no_rent_match,no project shared with any rent contract,10
+UM SUQAIM SECOND,Um Suqaim Second,UM SUQAIM SECOND,no_rent_match,no project shared with any rent contract,2
+UM SUQAIM THIRD,Um Suqaim Third (Jumeirah Living),UM SUQAIM THIRD,land_area,,86
+VILLANOVA,"Wadi Al Safa 5 (Dubai Land Residence Complex, Villanova)",WADI AL SAFA 5,project_crosswalk,"13 shared projects, 100% of matched sales -> Wadi Al Safa 5",111
+WADI AL AMARDI,Wadi Al Amardi,WADI AL AMARDI,no_rent_match,no project shared with any rent contract,3
+WADI AL SAFA 2,Wadi Al Safa 2 (Liwan),WADI AL SAFA 2,land_area,,61
+WADI AL SAFA 3,"Wadi Al Safa 3 (Majan, Living Legends)",WADI AL SAFA 3,land_area,,585
+WADI AL SAFA 4,Wadi Al Safa 4,WADI AL SAFA 4,land_area,,426
+WADI AL SAFA 5,"Wadi Al Safa 5 (Dubai Land Residence Complex, Villanova)",WADI AL SAFA 5,land_area,,470
+WADI AL SAFA 6,Wadi Al Safa 6 (Arabian Ranches I),WADI AL SAFA 6,land_area,,0
+WADI AL SAFA 7,"Wadi Al Safa 7 (Arabian Ranches II, Serena)",WADI AL SAFA 7,land_area,,185
+WARSAN FIRST,Warsan First,WARSAN FIRST,alias_pending_review,"2 shared projects, 100% of matched sales -> Al Warsan First",325
+WARSAN FOURTH,Warsan Fourth (International City Ph 2 & 3),WARSAN FOURTH,land_area,,2
+ZAABEEL FIRST,Zaabeel First,ZAABEEL FIRST,land_area,,65
+ZAABEEL SECOND,Zaabeel Second,ZAABEEL SECOND,land_area,,253

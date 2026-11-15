@@ -3,3 +3,9 @@ data/*.db
 __pycache__/
 *.pyc
 .DS_Store
+data/*.duckdb
+data/*.building.db
+target/
+dbt_packages/
+logs/
+.user.yml

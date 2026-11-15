@@ -1,0 +1,9 @@
+# Local dbt profile: DuckDB file next to the SQLite demo DB. For a warehouse,
+# swap this output for your adapter (Postgres, BigQuery, Snowflake...); the models don't change.
+dubai_property_ops:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: data/dbt.duckdb
+      threads: 4
