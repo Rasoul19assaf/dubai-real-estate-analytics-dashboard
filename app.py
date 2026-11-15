@@ -332,6 +332,15 @@ def _daily_counter() -> dict:
     return {"day": "", "n": 0}
 
 
+def _assistant_code_version() -> str:
+    """Hash of the assistant's source, so a code update never reuses a stale cached assistant."""
+    import hashlib
+    h = hashlib.sha256()
+    for f in sorted((ROOT / "assistant").glob("*.py")):
+        h.update(f.read_bytes())
+    return h.hexdigest()[:12]
+
+
 @st.cache_resource(show_spinner="Starting the assistant…")
 def _assistant(api_key: str, fp: str):
     from assistant.agent import DEFAULT_MODEL, DataAssistant, gemini_chat_model, resolve_model
@@ -374,7 +383,7 @@ def ask_the_data():
             st.warning("The demo's daily question limit has been reached. Please try again tomorrow.")
         else:
             counter["n"] += 1
-            assistant, model = _assistant(api_key, FP)
+            assistant, model = _assistant(api_key, FP + _assistant_code_version())
             with st.spinner("Querying the governed tables…"):
                 answer = assistant.ask(question)
             st.session_state["ask_history"].insert(0, (question, answer, model, assistant.retriever.mode))
