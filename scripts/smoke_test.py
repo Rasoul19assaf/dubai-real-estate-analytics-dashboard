@@ -71,6 +71,8 @@ def main():
         def _generate(self, *a, **k):
             raise RuntimeError("provider down")
     assert DataAssistant(Boom()).ask("anything").error, "provider failure must become a message, not a crash"
+    ans = DataAssistant([Boom(), ScriptedModel(script=script)]).ask("Top 3 apartment yields?")
+    assert ans.error is None and len(ans.sql) == 1, "must fall back to the next model when one fails"
 
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=300).run()

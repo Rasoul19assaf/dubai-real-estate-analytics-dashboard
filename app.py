@@ -343,12 +343,12 @@ def _assistant_code_version() -> str:
 
 @st.cache_resource(show_spinner="Starting the assistant…")
 def _assistant(api_key: str, fp: str):
-    from assistant.agent import DEFAULT_MODEL, DataAssistant, gemini_chat_model, resolve_model
+    from assistant.agent import DataAssistant, candidate_models, gemini_chat_model
     from assistant.retrieval import DEFAULT_EMBEDDING_MODEL, Retriever, gemini_embeddings
 
-    model = resolve_model(api_key, _secret("GEMINI_MODEL", DEFAULT_MODEL))
+    models = candidate_models(api_key, _secret("GEMINI_MODEL"))
     retriever = Retriever(embeddings=gemini_embeddings(api_key, _secret("GEMINI_EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL)))
-    return DataAssistant(gemini_chat_model(api_key, model), retriever), model
+    return DataAssistant([gemini_chat_model(api_key, m) for m in models], retriever), models
 
 
 @st.fragment
@@ -383,10 +383,10 @@ def ask_the_data():
             st.warning("The demo's daily question limit has been reached. Please try again tomorrow.")
         else:
             counter["n"] += 1
-            assistant, model = _assistant(api_key, FP + _assistant_code_version())
+            assistant, _models = _assistant(api_key, FP + _assistant_code_version())
             with st.spinner("Querying the governed tables…"):
                 answer = assistant.ask(question)
-            st.session_state["ask_history"].insert(0, (question, answer, model, assistant.retriever.mode))
+            st.session_state["ask_history"].insert(0, (question, answer, assistant.last_model, assistant.retriever.mode))
 
     for qtext, answer, model, mode in st.session_state["ask_history"]:
         with st.container(border=True):

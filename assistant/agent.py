@@ -51,28 +51,32 @@ class Answer:
     detail: str = ""        # short technical detail for the error, safe to display
 
 
-def resolve_model(api_key: str, preferred: str = DEFAULT_MODEL) -> str:
-    """Use the configured model if the key can see it; otherwise pick an available Flash model.
-    Model names are retired regularly, so the assistant should not die when one is."""
+def candidate_models(api_key: str, preferred: str = "") -> list[str]:
+    """Models to try, in order: the configured one (if any), then the newest Flash-Lite models
+    (fast and free), then Flash. Built from what the key can actually see, because model names
+    are retired regularly and the assistant should not die when one is."""
+    names: list[str] = []
     try:
         from google import genai
 
         names = [m.name.split("/")[-1] for m in genai.Client(api_key=api_key).models.list()]
-        if preferred in names:
-            return preferred
-        skip = ("image", "tts", "audio", "live", "embedding", "preview", "exp")
-        flash = sorted((n for n in names if n.startswith("gemini") and "flash" in n
-                        and not any(s in n for s in skip)), reverse=True)
-        return flash[0] if flash else preferred
     except Exception:  # noqa: BLE001
-        return preferred
+        pass
+    skip = ("image", "tts", "audio", "live", "embedding", "preview", "exp", "omni")
+    usable = sorted((n for n in names if n.startswith("gemini") and "flash" in n
+                     and not any(x in n for x in skip)), reverse=True)
+    lite = [n for n in usable if "lite" in n]
+    flash = [n for n in usable if "lite" not in n]
+    order = ([preferred] if preferred and (not names or preferred in names) else []) + lite[:2] + flash[:1]
+    order = list(dict.fromkeys(order))
+    return order[:3] or [DEFAULT_MODEL]
 
 
 def gemini_chat_model(api_key: str, model: str = DEFAULT_MODEL):
     from langchain_google_genai import ChatGoogleGenerativeAI
 
     return ChatGoogleGenerativeAI(model=model, google_api_key=api_key, temperature=0,
-                                  max_output_tokens=1200, max_retries=1, timeout=45)
+                                  max_output_tokens=1200, max_retries=0, timeout=40)
 
 
 def _text(content) -> str:
@@ -88,10 +92,14 @@ def _text(content) -> str:
 
 
 class DataAssistant:
-    def __init__(self, chat_model, retriever: Retriever | None = None, db_path=None):
-        self.chat_model = chat_model
+    """chat_models: one model or a list. On a provider error (timeout, overload, retired model)
+    the next model is tried; quota errors are not retried."""
+
+    def __init__(self, chat_models, retriever: Retriever | None = None, db_path=None):
+        self.chat_models = chat_models if isinstance(chat_models, (list, tuple)) else [chat_models]
         self.retriever = retriever or Retriever()
         self.db_path = db_path
+        self.last_model = ""
 
     def ask(self, question: str) -> Answer:
         from langchain.agents import create_agent
@@ -121,22 +129,29 @@ class DataAssistant:
                     ans.docs.append(d)
             return "\n\n".join(f"[{d.doc_id}] {d.text}" for d in hits) or "Nothing relevant found."
 
-        try:
-            agent = create_agent(self.chat_model, tools=[run_sql, search_docs], system_prompt=SYSTEM_PROMPT)
-            out = agent.invoke({"messages": [{"role": "user", "content": question}]},
-                               config={"recursion_limit": MAX_STEPS})
-            ans.text = _text(out["messages"][-1].content).strip()
-            if not ans.text:
+        for chat_model in self.chat_models:
+            ans.sql.clear(); ans.docs.clear()
+            ans.text, ans.error, ans.detail = "", None, ""
+            self.last_model = getattr(chat_model, "model", "") or type(chat_model).__name__
+            self.last_model = self.last_model.split("/")[-1]
+            try:
+                agent = create_agent(chat_model, tools=[run_sql, search_docs], system_prompt=SYSTEM_PROMPT)
+                out = agent.invoke({"messages": [{"role": "user", "content": question}]},
+                                   config={"recursion_limit": MAX_STEPS})
+                ans.text = _text(out["messages"][-1].content).strip()
+                if ans.text:
+                    return ans
                 ans.error = "The model returned an empty answer. Try rephrasing the question."
-        except Exception as e:  # noqa: BLE001 - never let the assistant raise into the app
-            msg = str(e)
-            key = getattr(self.chat_model, "google_api_key", None)
-            secret = key.get_secret_value() if hasattr(key, "get_secret_value") else ""
-            ans.detail = f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:400]
-            if "recursion" in msg.lower():
-                ans.error = "This question needed too many steps. Try a narrower question."
-            elif "429" in msg or "quota" in msg.lower() or "exhausted" in msg.lower():
-                ans.error = "The free API quota is used up for now. Try again in a minute."
-            else:
+            except Exception as e:  # noqa: BLE001 - never let the assistant raise into the app
+                msg = str(e)
+                key = getattr(chat_model, "google_api_key", None)
+                secret = key.get_secret_value() if hasattr(key, "get_secret_value") else ""
+                ans.detail = f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:400]
+                if "recursion" in msg.lower():
+                    ans.error = "This question needed too many steps. Try a narrower question."
+                    return ans
+                if "429" in msg or "quota" in msg.lower() or "exhausted" in msg.lower():
+                    ans.error = "The free API quota is used up for now. Try again in a minute."
+                    return ans
                 ans.error = f"The assistant could not answer ({type(e).__name__}). The dashboard tabs are unaffected."
         return ans

@@ -15,7 +15,7 @@ import time
 from datetime import datetime, timezone
 
 from assistant import tools as T
-from assistant.agent import DEFAULT_MODEL, DataAssistant, gemini_chat_model, resolve_model
+from assistant.agent import DataAssistant, candidate_models, gemini_chat_model
 from assistant.retrieval import Retriever, gemini_embeddings
 from pipeline import config
 
@@ -73,9 +73,10 @@ def main():
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         sys.exit("Set GEMINI_API_KEY to run the evaluation.")
-    model = resolve_model(key, os.environ.get("GEMINI_MODEL", DEFAULT_MODEL))
+    models = candidate_models(key, os.environ.get("GEMINI_MODEL", ""))
+    model = models[0]
     retriever = Retriever(embeddings=gemini_embeddings(key))
-    assistant = DataAssistant(gemini_chat_model(key, model), retriever)
+    assistant = DataAssistant([gemini_chat_model(key, m) for m in models], retriever)
     rows, passed = [], 0
     for c in cases():
         t = time.time()
