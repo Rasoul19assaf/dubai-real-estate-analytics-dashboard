@@ -96,6 +96,22 @@ next step and owner. The app's **Data health** tab shows the same results. Curre
 Before/after time-to-answer for the same business questions (Excel on raw exports vs this tool):
 **[docs/BEFORE_AFTER_TEST.md](docs/BEFORE_AFTER_TEST.md)**. Only measured times are reported there.
 
+### 6. Ask the data (AI assistant)
+A LangChain agent in its own tab answers plain-language questions with two tools:
+
+| Tool | What it does | Guardrail |
+|---|---|---|
+| `run_sql` (text-to-SQL) | Writes and runs SQL for every number | Read-only connection; SQLite authorizer allows `SELECT` on governed tables only, so raw tables and writes are refused by the database, not by the prompt; row and time limits |
+| `search_docs` (RAG) | Retrieves KPI definitions, data-quality findings and limitations | Vector search over Gemini embeddings, with a keyword (BM25) fallback |
+
+Every answer shows the SQL it ran and the definitions it used, and the assistant is told to say "the data can't
+answer that" instead of guessing. It runs on Gemini's free API tier with per-visit and per-day question limits.
+`python -m assistant.evaluate` scores it against answers computed by SQL and writes `docs/ASSISTANT_EVAL.md`.
+
+**Isolation:** the assistant's libraries load only inside its tab. With no API key, a provider outage or a failed
+import, that tab shows a notice and the four dashboard tabs keep working. `python scripts/smoke_test.py` checks this
+offline before each push.
+
 ---
 
 ## Refreshing the data
@@ -111,7 +127,10 @@ Before/after time-to-answer for the same business questions (Excel on raw export
 pip install -r requirements.txt
 python -m pipeline.build      # load → models → quality checks → reports (about 10 seconds)
 streamlit run app.py          # also rebuilds automatically when any input file changes
+python scripts/smoke_test.py  # offline check: build, guardrails, assistant wiring, app loads
 ```
+The assistant tab needs `GEMINI_API_KEY` (free key from Google AI Studio) as an environment variable or in
+Streamlit secrets. Never commit it.
 With dbt (optional, same models):
 ```bash
 pip install dbt-duckdb
@@ -121,7 +140,8 @@ dbt build --profiles-dir .
 
 ## Project structure
 ```
-app.py                         Streamlit app (4 tabs)
+app.py                         Streamlit app (5 tabs)
+assistant/                     AI assistant: guarded SQL tool, retrieval, agent, evaluation
 dbt_project.yml / profiles.yml dbt project + the single place thresholds live
 models/  staging/ intermediate/ marts/  schema.yml (tests + Lightdash metric definitions)
 seeds/                         reviewed reference data (area crosswalk, sale rules, unit classes)
@@ -143,5 +163,3 @@ data/sales/, data/rents/       DLD exports (.csv.gz);  data/archive_2023/ = v1's
 ## Next steps
 - Point the dbt project at Lightdash (metrics are already defined in `models/schema.yml`).
 - Automate the refresh through the Dubai Pulse API (needs an API key) instead of captcha-protected downloads.
-- Natural-language "ask the data" layer over the marts, answering only from the governed tables and showing the
-  SQL it ran, so answers stay auditable.

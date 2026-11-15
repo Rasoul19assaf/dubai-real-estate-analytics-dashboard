@@ -89,8 +89,8 @@ st.caption(
     f"Latest refresh: {dq['run_at'].iat[0]} · Data health: {n_fail} {STATUS['FAIL']} · {n_warn} {STATUS['WARN']}"
 )
 
-tab_screen, tab_market, tab_health, tab_kpis = st.tabs(
-    ["Acquisition screening", "Market overview", "Data health", "KPI definitions"]
+tab_screen, tab_market, tab_health, tab_kpis, tab_ask = st.tabs(
+    ["Acquisition screening", "Market overview", "Data health", "KPI definitions", "Ask the data (AI)"]
 )
 
 # ---------------------------------------------------------------------------
@@ -302,9 +302,117 @@ with tab_kpis:
                                       "business_owner", "caveats"]]
     st.dataframe(kt.rename(columns=str.capitalize), hide_index=True, width="stretch")
 
+# ---------------------------------------------------------------------------
+# Tab 5: Ask the data (AI assistant)
+# Fully isolated: its libraries are imported only here, inside try/except, and it runs as a
+# fragment. No API key, a missing library or a provider outage only affects this tab.
+# ---------------------------------------------------------------------------
+SAMPLE_QUESTIONS = [
+    "Which 5 areas have the highest reliable gross yield for apartments?",
+    "Compare Jumeirah Village Circle and Dubai Marina apartments: price, yield and liquidity.",
+    "How is gross yield calculated, and what are its limits?",
+    "What data-quality problems were found in the rent data?",
+]
+MAX_QUESTIONS_PER_SESSION = 10
+MAX_QUESTIONS_PER_DAY = 300      # across all visitors; keeps usage inside the free API tier
+
+
+def _secret(name: str, default: str = "") -> str:
+    import os
+    try:
+        if name in st.secrets:
+            return str(st.secrets[name])
+    except Exception:
+        pass
+    return os.environ.get(name, default)
+
+
+@st.cache_resource
+def _daily_counter() -> dict:
+    return {"day": "", "n": 0}
+
+
+@st.cache_resource(show_spinner="Starting the assistant…")
+def _assistant(api_key: str, fp: str):
+    from assistant.agent import DEFAULT_MODEL, DataAssistant, gemini_chat_model, resolve_model
+    from assistant.retrieval import DEFAULT_EMBEDDING_MODEL, Retriever, gemini_embeddings
+
+    model = resolve_model(api_key, _secret("GEMINI_MODEL", DEFAULT_MODEL))
+    retriever = Retriever(embeddings=gemini_embeddings(api_key, _secret("GEMINI_EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL)))
+    return DataAssistant(gemini_chat_model(api_key, model), retriever), model
+
+
+@st.fragment
+def ask_the_data():
+    st.markdown("**Ask a question in plain language.** The assistant writes SQL against the same governed tables "
+                "as the dashboard and looks up definitions in the KPI catalogue. Every answer shows the SQL it ran, "
+                "so it can be checked.")
+    api_key = _secret("GEMINI_API_KEY")
+    if not api_key:
+        st.info("The assistant is not switched on in this deployment (no API key configured). "
+                "Everything else in the dashboard works without it.")
+        st.caption("Example questions it answers: " + " · ".join(SAMPLE_QUESTIONS))
+        return
+
+    import datetime as _dt
+    st.session_state.setdefault("ask_history", [])
+    picked = st.pills("Try one", SAMPLE_QUESTIONS, key="ask_pick")
+    with st.form("ask_form", clear_on_submit=True):
+        typed = st.text_input("Your question", max_chars=400, placeholder="e.g. Where can I buy a liquid apartment under AED 1M with a yield above 7%?")
+        go = st.form_submit_button("Ask")
+    question = typed.strip() if go and typed.strip() else (picked if picked and picked != st.session_state.get("ask_last_pick") else "")
+    if picked:
+        st.session_state["ask_last_pick"] = picked
+
+    if question:
+        counter, today = _daily_counter(), _dt.date.today().isoformat()
+        if counter["day"] != today:
+            counter.update(day=today, n=0)
+        if len(st.session_state["ask_history"]) >= MAX_QUESTIONS_PER_SESSION:
+            st.warning(f"Limit of {MAX_QUESTIONS_PER_SESSION} questions per visit reached (this demo runs on a free API tier).")
+        elif counter["n"] >= MAX_QUESTIONS_PER_DAY:
+            st.warning("The demo's daily question limit has been reached. Please try again tomorrow.")
+        else:
+            counter["n"] += 1
+            assistant, model = _assistant(api_key, FP)
+            with st.spinner("Querying the governed tables…"):
+                answer = assistant.ask(question)
+            st.session_state["ask_history"].insert(0, (question, answer, model, assistant.retriever.mode))
+
+    for qtext, answer, model, mode in st.session_state["ask_history"]:
+        with st.container(border=True):
+            st.markdown(f"**Q: {qtext}**")
+            if answer.error:
+                st.warning(answer.error)
+            else:
+                st.markdown(answer.text)
+            for i, res in enumerate(answer.sql, 1):
+                with st.expander(f"SQL {i} of {len(answer.sql)}" + (" (failed, retried)" if res.error else f" · {len(res.rows)} rows")):
+                    st.code(res.query, language="sql")
+                    if res.error:
+                        st.caption(res.error)
+                    elif res.rows:
+                        st.dataframe(pd.DataFrame(res.rows, columns=res.columns), hide_index=True, width="stretch")
+            if answer.docs:
+                with st.expander("Definitions and findings used: " + ", ".join(d.doc_id for d in answer.docs)):
+                    for d in answer.docs:
+                        st.markdown(f"**{d.doc_id} · {d.title}**  \n{d.text}")
+            st.caption(f"Model: {model} · Retrieval: {mode} · AI-generated: check the SQL before relying on a number. "
+                       "Not investment advice.")
+
+
+with tab_ask:
+    try:
+        ask_the_data()
+    except Exception as e:  # the assistant must never take the dashboard down
+        st.warning(f"The assistant is unavailable right now ({type(e).__name__}). The other tabs are unaffected.")
+
 st.sidebar.markdown("### About")
 st.sidebar.caption(
     "Data: Dubai Land Department open data (transactions and Ejari rents exported from dubailand.gov.ae). "
     "Pipeline: Python load → dbt SQL models → automated data-quality checks → Streamlit. "
     "See the README for the case study."
+)
+st.sidebar.caption(
+    f"Runtime: Python {sys.version_info.major}.{sys.version_info.minor} · Streamlit {st.__version__}"
 )
