@@ -384,6 +384,9 @@ def ask_the_data():
             st.markdown(f"**Q: {qtext}**")
             if answer.error:
                 st.warning(answer.error)
+                if getattr(answer, "detail", ""):
+                    with st.expander("Technical detail"):
+                        st.code(answer.detail, language=None)
             else:
                 st.markdown(answer.text)
             for i, res in enumerate(answer.sql, 1):

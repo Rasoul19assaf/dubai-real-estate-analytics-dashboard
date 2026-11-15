@@ -48,6 +48,7 @@ class Answer:
     sql: list[T.SqlResult] = field(default_factory=list)
     docs: list[T.Doc] = field(default_factory=list)
     error: str | None = None
+    detail: str = ""        # short technical detail for the error, safe to display
 
 
 def resolve_model(api_key: str, preferred: str = DEFAULT_MODEL) -> str:
@@ -129,6 +130,9 @@ class DataAssistant:
                 ans.error = "The model returned an empty answer. Try rephrasing the question."
         except Exception as e:  # noqa: BLE001 - never let the assistant raise into the app
             msg = str(e)
+            key = getattr(self.chat_model, "google_api_key", None)
+            secret = key.get_secret_value() if hasattr(key, "get_secret_value") else ""
+            ans.detail = f"{type(e).__name__}: " + (msg.replace(secret, "***") if secret else msg)[:400]
             if "recursion" in msg.lower():
                 ans.error = "This question needed too many steps. Try a narrower question."
             elif "429" in msg or "quota" in msg.lower() or "exhausted" in msg.lower():
